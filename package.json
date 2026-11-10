@@ -1,0 +1,10 @@
+{
+  "name": "cvclarity",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CV checker: ATS checks, spelling and grammar, professional templates and free downloads",
+  "type": "module",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=21" },
+  "dependencies": { "@anthropic-ai/sdk": "latest" }
+}

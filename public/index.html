@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cvclarity: free ATS CV checker</title>
+  <meta name="description" content="Check your CV is ATS-friendly, fix spelling and grammar and download it free as PDF or Word.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+
+<!-- ============ Landing ============ -->
+<div id="landing">
+  <header class="nav">
+    <div class="wrap nav-in">
+      <a class="logo" href="#top" aria-label="cvclarity home">cv<span>clarity</span></a>
+      <nav class="nav-links" aria-label="Main">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#free">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="btn" id="resume" data-action="resume" hidden>Back to my CV</button>
+      <button class="btn btn-primary" data-action="upload">Check my CV</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-in">
+        <div class="hero-text">
+          <p class="eyebrow">Free ATS CV checker</p>
+          <h1>Will your CV get past the <em>screening software</em>?</h1>
+          <p class="lead">Most large employers use an applicant tracking system (ATS) to read CVs before a person does. Upload yours to see what it reads, what it misses and how to fix it.</p>
+          <div class="hero-cta">
+            <button class="btn btn-primary btn-lg" data-action="upload">Upload my CV</button>
+            <button class="btn btn-lg" data-action="sample">Try a sample CV</button>
+          </div>
+          <ul class="ticks">
+            <li>No sign-up</li>
+            <li>Free PDF and Word downloads</li>
+            <li>Your CV is read in your browser</li>
+          </ul>
+        </div>
+
+        <div class="hero-card" aria-hidden="true">
+          <div class="mock-top">
+            <svg class="ring ok" width="112" height="112" viewBox="0 0 128 128"><circle cx="64" cy="64" r="54" fill="none" stroke-width="11" class="ring-bg"/><circle cx="64" cy="64" r="54" fill="none" stroke-width="11" stroke-linecap="round" class="ring-fg" stroke-dasharray="244 339" transform="rotate(-90 64 64)"/><text x="64" y="66" text-anchor="middle" class="ring-num">72</text><text x="64" y="86" text-anchor="middle" class="ring-of">out of 100</text></svg>
+            <div><p class="label">ATS score</p><strong>Good, with a few things to fix</strong></div>
+          </div>
+          <ul class="mock-list">
+            <li class="fail"><span>✕</span>Two-column layout scrambles the reading order</li>
+            <li class="warn"><span>!</span>4 spelling mistakes found</li>
+            <li class="warn"><span>!</span>6 bullet points have no figures</li>
+            <li class="pass"><span>✓</span>Contact details read correctly</li>
+            <li class="pass"><span>✓</span>Standard section headings</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="upload-card" id="dropzone">
+        <div>
+          <h2>Start with the CV you have</h2>
+          <p>Drop a PDF, Word (.docx) or text file here, or choose one. It is read on your device and never uploaded.</p>
+        </div>
+        <div class="upload-actions">
+          <button class="btn btn-primary btn-lg" data-action="upload">Choose a file</button>
+          <button class="btn" data-action="paste-toggle">Paste text instead</button>
+          <button class="btn btn-ghost" data-action="scratch">Start from scratch</button>
+        </div>
+        <div class="paste" id="pasteBox" hidden>
+          <label class="field"><span>Paste your CV</span><textarea id="pasteText" rows="9" placeholder="Paste the full text of your CV here"></textarea></label>
+          <button class="btn btn-primary" data-action="paste-analyse">Check this CV</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="how">
+      <h2>How it works</h2>
+      <p class="section-lead">Three steps, about five minutes.</p>
+      <ol class="steps">
+        <li><span class="num">01</span><h3>Upload your CV</h3><p>We read it the way an ATS does and show you exactly which details came through and which were lost.</p></li>
+        <li><span class="num">02</span><h3>Fix what is flagged</h3><p>Work through a ranked list: layout problems, weak bullet points, spelling and grammar.</p></li>
+        <li><span class="num">03</span><h3>Download and apply</h3><p>Choose a professional template, then download as PDF, Word or plain text, as often as you like.</p></li>
+      </ol>
+    </section>
+
+    <section class="wrap section" id="features">
+      <h2>What it checks</h2>
+      <p class="section-lead">A CV checker, with what you need to fix what it finds.</p>
+      <div class="features">
+        <article class="card"><span class="f-ico">01</span><h3>ATS compatibility check</h3><p>More than 25 checks on layout, headings, contact details, dates, length and file type, each with a plain explanation and a fix.</p></article>
+        <article class="card"><span class="f-ico">02</span><h3>Spelling and grammar</h3><p>British or American English. Catches typos, repeated words, mixed tenses and first-person slips, with one-click corrections.</p></article>
+        <article class="card"><span class="f-ico">03</span><h3>Content and impact</h3><p>Flags duty-style wording, clichés, first-person slips and bullet points with no figures, and shows you which ones to fix.</p></article>
+        <article class="card"><span class="f-ico">04</span><h3>Professional templates</h3><p>Three clean, single-column designs that recruiters like and software can read. The preview is exactly what you download.</p></article>
+        <article class="card"><span class="f-ico">05</span><h3>Free downloads</h3><p>PDF, Word and plain text, as many times as you like. No watermark, no account and no card details.</p></article>
+        <article class="card"><span class="f-ico">06</span><h3>Private by design</h3><p>Your CV is read, checked and saved in your own browser. Nothing is uploaded to be checked.</p></article>
+      </div>
+    </section>
+
+    <section class="wrap" id="free">
+      <div class="free-strip">
+        <div>
+          <h2>Free means free</h2>
+          <p>Download as many times as you like, in PDF, Word or plain text. No watermark, no trial that runs out, no card details, no account.</p>
+        </div>
+        <ul>
+          <li><strong>£0</strong> for every check</li>
+          <li><strong>£0</strong> for every download</li>
+          <li><strong>0</strong> sign-ups needed</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="wrap section narrow" id="faq">
+      <h2>Questions</h2>
+      <details><summary>What is an ATS?</summary><p>An applicant tracking system is the software employers use to collect and sort applications. It pulls the text out of your CV, files it under headings such as experience and education, and lets recruiters search and rank candidates. If it cannot read your CV properly, a recruiter may never see it.</p></details>
+      <details><summary>How is the score worked out?</summary><p>From checks in four areas: whether the file can be read, structure and layout, content and impact, and spelling and grammar. Each check shows what was found and why it matters. It is a guide based on how these systems commonly behave, not a guarantee for any one employer's software.</p></details>
+      <details><summary>Where does my CV go?</summary><p>Nowhere. Your CV is read, checked and saved in your own browser. Fonts, the dictionary and file-reading libraries are loaded from public CDNs. If you run your own copy with the optional AI proofread switched on, the text is sent to Anthropic's Claude using your own API key.</p></details>
+      <details><summary>Does it use AI?</summary><p>Not on this site. The ATS check, spelling and grammar, templates and downloads are all rule-based and run in your browser. The <a href="https://github.com/kranmal/cvclarity">source code</a> has an optional AI proofread you can switch on if you run your own copy.</p></details>
+      <details><summary>Which file should I send to employers?</summary><p>A PDF made here or a Word file both work with modern systems. If the advert asks for a particular format, use that one.</p></details>
+      <details><summary>Is it really free to download?</summary><p>Yes. The files are created on your own device, so there is nothing to charge for.</p></details>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-in">
+      <a class="logo" href="#top">cv<span>clarity</span></a>
+      <p>Your CV stays in your browser. Scores are guidance, not a guarantee of an interview. <a href="https://kranmal.github.io/privacy.html">Privacy policy</a> · <a href="https://github.com/kranmal/cvclarity">Source</a></p>
+    </div>
+  </footer>
+</div>
+
+<!-- ============ App ============ -->
+<div id="app" hidden>
+  <header class="appbar">
+    <div class="wrap-wide appbar-in">
+      <button class="logo logo-btn" data-action="home" aria-label="cvclarity home">cv<span>clarity</span></button>
+      <span class="cv-name" id="cvName"></span>
+      <span class="pill" id="scorePill"></span>
+      <span class="grow"></span>
+      <span class="tag" id="aiChip" hidden></span>
+      <button class="btn btn-ghost btn-sm" data-action="new-cv">New CV</button>
+      <details class="menu" id="downloadMenu">
+        <summary class="btn btn-primary">Download free</summary>
+        <div class="menu-list">
+          <button data-action="download" data-format="pdf"><strong>PDF</strong><small>Best for most applications</small></button>
+          <button data-action="download" data-format="docx"><strong>Word (.docx)</strong><small>When the advert asks for Word</small></button>
+          <button data-action="download" data-format="txt"><strong>Plain text</strong><small>For pasting into online forms</small></button>
+        </div>
+      </details>
+    </div>
+    <div class="wrap-wide"><nav class="tabs" id="tabs" role="tablist" aria-label="Tools"></nav></div>
+  </header>
+  <main class="wrap-wide" id="panel"></main>
+</div>
+
+<dialog id="modal"></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="file" accept=".pdf,.docx,.txt" hidden>
+
+</body>
+</html>
